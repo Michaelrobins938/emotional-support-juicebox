@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotional Support Disorder 🧃</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #1a1a2e;
+            --bg-card: #16213e;
+            --accent-purple: #6c5ce7;
+            --accent-pink: #fd79a8;
+            --accent-cyan: #00cec9;
+            --text-primary: #ddd6fe;
+            --text-secondary: #a5b3cf;
+            --text-muted: #6b7280;
+            --border-glow: #2d3748;
+            --danger: #ff6b6b;
+            --success: #51cf66;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--accent-purple), var(--accent-pink), var(--accent-cyan));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        .description {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        .pet-container {
+            background: linear-gradient(135deg, rgba(0, 206, 201, 0.1), rgba(108, 92, 231, 0.1));
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--accent-cyan);
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 206, 201, 0.1);
+        }
+        
+        .pet-display {
+            background: var(--bg-primary);
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+            border: 2px solid var(--border-glow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pet-juice-box {
+            font-size: 5rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .pet-face {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            transition: all 0.5s ease;
+            color: var(--text-primary);
+        }
+        
+        .pet-body {
+            filter: hue-rotate(0deg);
+            transition: all 0.5s ease;
+        }
+        
+        .pet-thoughts {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 1.5rem;
+            opacity: 0.8;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.8rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .pet-stats {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-glow);
+        }
+        
+        .stat-bar span:first-child {
+            min-width: 180px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .stat-bar span:last-child {
+            min-width: 180px;
+            text-align: right;
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .bar {
+            flex: 1;
+            height: 25px;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-glow);
+            position: relative;
+        }
+        
+        .fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink), var(--accent-cyan));
+            transition: all 0.5s ease;
+            border-radius: 12px;
+            position: relative;
+        }
+        
+        .fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .pet-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .pet-btn {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
+            color: var(--text-primary);
+            border: 1px solid var(--border-glow);
+            padding: 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            text-align: center;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pet-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(108, 92, 231, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .pet-btn:hover::before {
+            left: 100%;
+        }
+        
+        .pet-btn:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-purple);
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.3);
+        }
+        
+        .pet-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .pet-btn small {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            font-weight: 400;
+        }
+        
+        .pet-status {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1.5rem;
+            border-radius: 15px;
+            font-style: italic;
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 206, 201, 0.3);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        .pet-happy {
+            animation: bounce 1s ease;
+            filter: hue-rotate(45deg) saturate(1.2);
+        }
+        
+        .pet-sad {
+            filter: grayscale(50%) hue-rotate(240deg);
+        }
+        
+        .pet-excited {
+            animation: shake 0.5s ease-in-out;
+            filter: hue-rotate(90deg) saturate(1.5);
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-8px); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+        
+        .footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-family: 'Fira Code', monospace;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            border: 1px solid var(--border-glow);
+        }
+        
+        .care-tips {
+            background: linear-gradient(135deg, rgba(253, 121, 168, 0.1), rgba(108, 92, 231, 0.1));
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--accent-pink);
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .tip-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+        
+        .tip-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-cyan);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--accent-pink);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .pet-container { padding: 1.5rem; }
+            .pet-display { padding: 2rem 1rem; }
+            .pet-juice-box { font-size: 4rem; }
+            .pet-actions { grid-template-columns: 1fr; }
+            .stat-bar { flex-direction: column; gap: 0.5rem; text-align: center; }
+            .stat-bar span:first-child, .stat-bar span:last-child { min-width: unset; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">🧃 Emotional Support Disorder</h1>
+            <p class="subtitle">"It's a juice box. It's a coping mechanism. It's... you."</p>
+            <p class="description">
+                The virtual pet you project all your feelings onto because that's somehow healthier than actually processing them. 
+                Like a tamagotchi, but for people who understand that sometimes nurturing something else feels easier than self-care.
+            </p>
+        </header>
+
+        <div class="pet-container">
+            <div class="pet-display">
+                <div class="pet-juice-box" id="juiceBox">
+                    <div class="pet-face" id="petFace">( ◔ ◡ ◔ )</div>
+                    <div class="pet-body">🧃</div>
+                </div>
+                <div class="pet-thoughts" id="petThoughts">*existing peacefully in beverage form*</div>
+            </div>
+            
+            <div class="pet-stats">
+                <div class="stat-bar">
+                    <span>💜 Emotional Stability</span>
+                    <div class="bar"><div class="fill" id="stability" style="width: 70%"></div></div>
+                    <span id="stabilityText">Mildly Dissociating</span>
+                </div>
+                <div class="stat-bar">
+                    <span>☕ Stimulation Level</span>
+                    <div class="bar"><div class="fill" id="stimulation" style="width: 40%"></div></div>
+                    <span id="stimulationText">Understimulated</span>
+                </div>
+                <div class="stat-bar">
+                    <span>🎯 Validation Meter</span>
+                    <div class="bar"><div class="fill" id="validation" style="width: 60%"></div></div>
+                    <span id="validationText">Seeking External Approval</span>
+                </div>
+                <div class="stat-bar">
+                    <span>🧠 Executive Function</span>
+                    <div class="bar"><div class="fill" id="executive" style="width: 30%"></div></div>
+                    <span id="executiveText">Loading... Please Wait</span>
+                </div>
+            </div>
+            
+            <div class="pet-actions">
+                <button class="pet-btn" onclick="feedJuice()">
+                    🧃 Give Juice
+                    <small>+dopamine boost</small>
+                </button>
+                <button class="pet-btn" onclick="giveValidation()">
+                    💜 Validate Feelings
+                    <small>+emotional stability</small>
+                </button>
+                <button class="pet-btn" onclick="provideStimulation()">
+                    🎵 Provide Stimulation
+                    <small>+focus enhancement</small>
+                </button>
+                <button class="pet-btn" onclick="enableHyperfocus()">
+                    ⚡ Enable Hyperfocus
+                    <small>+executive function (risky)</small>
+                </button>
+                <button class="pet-btn" onclick="allowRest()">
+                    😴 Allow Rest
+                    <small>+all stats (revolutionary)</small>
+                </button>
+                <button class="pet-btn" onclick="projectFeelings()">
+                    🎭 Project Feelings
+                    <small>+self-awareness through proxy</small>
+                </button>
+            </div>
+            
+            <div class="pet-status" id="petStatus">
+                Your juice box is contemplating the void but in a cozy way
+            </div>
+        </div>
+
+        <div class="care-tips">
+            <h2 class="section-title">🌟 Care Instructions</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <strong>🧃 Juice Dependency</strong><br>
+                    Your pet thrives on regular dopamine hits. Feed responsibly but frequently.
+                </div>
+                <div class="tip-card">
+                    <strong>💜 Emotional Projection</strong><br>
+                    It's okay to care more about your juice box than yourself sometimes. Baby steps.
+                </div>
+                <div class="tip-card">
+                    <strong>⚡ Hyperfocus Warning</strong><br>
+                    Boosts executive function but drains everything else. Use sparingly, like caffeine after 2pm.
+                </div>
+                <div class="tip-card">
+                    <strong>😴 Rest is Productivity</strong><br>
+                    Revolutionary concept: doing nothing is doing something. Your juice box gets it.
+                </div>
+                <div class="tip-card">
+                    <strong>🎭 Healthy Projection</strong><br>
+                    Sometimes caring for something else teaches us how to care for ourselves.
+                </div>
+                <div class="tip-card">
+                    <strong>📱 Digital Wellness</strong><br>
+                    Check in regularly, but don't let your juice box become another source of guilt.
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>
+                Made with ✨ neurodivergent love ✨<br>
+                "Your worth isn't measured by how well you care for a virtual juice box,<br>
+                but if it helps you practice self-compassion, we're here for it."<br><br>
+                <em>Remember: You deserve the same care you give your juice box friend.</em>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Pet Stats - representing the user's current state
+        let petStats = {
+            stability: 70,
+            stimulation: 40,
+            validation: 60,
+            executive: 30
+        };
+
+        // Different emotional states for our juice box friend
+        let petFaces = {
+            happy: "( ◕ ◡ ◕ )",
+            sad: "( ╥ ﹏ ╥ )",
+            excited: "( ☆ ▽ ☆ )",
+            tired: "( - ‸ - )",
+            confused: "( ಠ ◡ ಠ )",
+            zen: "( ◔ ◡ ◔ )",
+            hyperfocus: "( ⊙ ω ⊙ )",
+            dissociating: "( ° ▽ ° )",
+            overwhelmed: "( ⚆ _ ⚆ )",
+            content: "( ˘ ◡ ˘ )"
+        };
+
+        // Juice box thoughts based on overall wellbeing
+        let petThoughts = {
+            high: [
+                "*vibing with the universe*",
+                "*contemplating existence but make it cute*",
+                "*feeling emotionally regulated for once*",
+                "*achieving optimal juice box consciousness*",
+                "*in harmony with my neurodivergent self*",
+                "*radiating big juice box energy*",
+                "*living my best beverage life*"
+            ],
+            medium: [
+                "*existing peacefully in beverage form*",
+                "*managing the chaos inside*",
+                "*trying to adult but make it juice box*",
+                "*processing emotions at 2x speed*",
+                "*being a whole mood*",
+                "*maintaining juice box equilibrium*",
+                "*embracing the container life*"
+            ],
+            low: [
+                "*questioning everything*",
+                "*buffering... please wait*",
+                "*having big feelings in a small container*",
+                "*masking is exhausting*",
+                "*need emotional refill*",
+                "*contemplating the void*",
+                "*existing at minimum capacity*"
+            ]
+        };
+
+        // Status messages that reflect the user's state through juice box metaphors
+        let statusMessages = [
+            "Your juice box is having an existential crisis but in a manageable way",
+            "Peak emotional support juice box energy achieved",
+            "Your juice box understands you better than you understand yourself",
+            "Currently projecting all available feelings onto this inanimate object",
+            "Your juice box is practicing mindfulness (it's working better than when you tried)",
+            "Emotional stability: questionable. Juice box vibes: immaculate",
+            "Your juice box has achieved what you're still working toward: self-acceptance",
+            "Warning: May cause excessive attachment to beverage containers",
+            "Your juice box is your therapist now. This is fine. Everything is fine.",
+            "Juice box status: Absolutely thriving despite everything",
+            "Your juice box is modeling healthy emotional regulation",
+            "Achievement unlocked: Caring about something consistently",
+            "Your juice box accepts you exactly as you are right now",
+            "Plot twist: The juice box was the real self-care all along"
+        ];
+
+        function updatePetDisplay() {
+            const avgStats = (petStats.stability + petStats.stimulation + petStats.validation + petStats.executive) / 4;
+            const faceElement = document.getElementById('petFace');
+            const thoughtsElement = document.getElementById('petThoughts');
+            const juiceBox = document.getElementById('juiceBox');
+
+            // Update face and animation based on overall stats
+            if (avgStats > 80) {
+                faceElement.textContent = petFaces.happy;
+                juiceBox.className = 'pet-juice-box pet-happy';
+            } else if (avgStats > 60) {
+                faceElement.textContent = petFaces.content;
+                juiceBox.className = 'pet-juice-box';
+            } else if (avgStats > 40) {
+                faceElement.textContent = petFaces.zen;
+                juiceBox.className = 'pet-juice-box';
+            } else if (avgStats > 20) {
+                faceElement.textContent = petFaces.confused;
+                juiceBox.className = 'pet-juice-box';
+            } else {
+                faceElement.textContent = petFaces.sad;
+                juiceBox.className = 'pet-juice-box pet-sad';
+            }
+
+            // Update thoughts based on stats
+            let thoughtCategory = avgStats > 65 ? 'high' : avgStats > 35 ? 'medium' : 'low';
+            const randomThought = petThoughts[thoughtCategory][Math.floor(Math.random() * petThoughts[thoughtCategory].length)];
+            thoughtsElement.textContent = randomThought;
+
+            // Update status message
+            const randomStatus = statusMessages[Math.floor(Math.random() * statusMessages.length)];
+            document.getElementById('petStatus').textContent = randomStatus;
+        }
+
+        function updateStatBars() {
+            const stats = ['stability', 'stimulation', 'validation', 'executive'];
+            const labels = {
+                stability: ['Emotional Wreck', 'Barely Hanging On', 'Mildly Dissociating', 'Surprisingly Stable', 'Zen Master'],
+                stimulation: ['Understimulated', 'Seeking Input', 'Adequately Stimmed', 'Perfectly Stimulated', 'Overstimulated'],
+                validation: ['Seeking External Approval', 'Needs Reassurance', 'Moderately Validated', 'Feeling Seen', 'Completely Validated'],
+                executive: ['Loading... Please Wait', 'Buffering', 'Partially Functional', 'Actually Working', 'Peak Performance']
+            };
+
+            stats.forEach(stat => {
+                const value = Math.max(0, Math.min(100, petStats[stat]));
+                const fill = document.getElementById(stat);
+                const text = document.getElementById(stat + 'Text');
+                
+                fill.style.width = value + '%';
+                
+                // Determine label based on stat level
+                const labelIndex = Math.floor(value / 20);
+                text.textContent = labels[stat][Math.min(labelIndex, 4)];
+            });
+        }
+
+        function petAction(changes, specialFace = null, specialThought = null) {
+            // Update stats based on action
+            Object.keys(changes).forEach(stat => {
+                petStats[stat] = Math.max(0, Math.min(100, petStats[stat] + changes[stat]));
+            });
+
+            updateStatBars();
+            updatePetDisplay();
+
+            // Special reactions for specific actions
+            if (specialFace) {
+                document.getElementById('petFace').textContent = petFaces[specialFace];
+            }
+
+            if (specialThought) {
+                document.getElementById('petThoughts').textContent = specialThought;
+            }
+
+            // Visual feedback
+            const juiceBox = document.getElementById('juiceBox');
+            juiceBox.classList.add('pet-excited');
+            setTimeout(() => {
+                juiceBox.classList.remove('pet-excited');
+            }, 500);
+
+            // Gradual stat decay over time (because nothing good lasts forever)
+            setTimeout(() => {
+                Object.keys(petStats).forEach(stat => {
+                    const decayAmount = Math.random() * 3;
+                    petStats[stat] = Math.max(0, petStats[stat] - decayAmount);
+                });
+                updateStatBars();
+                updatePetDisplay();
+            }, 15000);
+        }
+
+        // Care actions
+        function feedJuice() {
+            petAction({
+                stimulation: 15,
+                validation: 10,
+                stability: 5
+            }, 'excited', '*slurping appreciatively*');
+        }
+
+        function giveValidation() {
+            petAction({
+                validation: 20,
+                stability: 15
+            }, 'happy', '*feeling seen and understood*');
+        }
+
+        function provideStimulation() {
+            petAction({
+                stimulation: 20,
+                executive: 10
+            }, 'excited', '*brain tingles activate*');
+        }
+
+        function enableHyperfocus() {
+            petAction({
+                executive: 25,
+                stimulation: -10,
+                stability: -5
+            }, 'hyperfocus', '*tunnel vision engaged*');
+        }
+
+        function allowRest() {
+            petAction({
+                stability: 15,
+                validation: 10,
+                executive: 10,
+                stimulation: 5
+            }, 'zen', '*recharging in peace*');
+        }
+
+        function projectFeelings() {
+            petAction({
+                validation: 15,
+                stability: 10
+            }, 'content', '*accepting all your projected emotions with grace*');
+        }
+
+        // Initialize the pet
+        updateStatBars();
+        updatePetDisplay();
+
+        // Automatic stat decay over time (life is hard)
+        setInterval(() => {
+            Object.keys(petStats).forEach(stat => {
+                const decayAmount = Math.random() * 1.5;
+                petStats[stat] = Math.max(0, petStats[stat] - decayAmount);
+            });
+            updateStatBars();
+            updatePetDisplay();
+        }, 45000);
+
+        // Random status updates to keep things interesting
+        setInterval(() => {
+            if (Math.random() < 0.3) { // 30% chance every interval
+                updatePetDisplay();
+            }
+        }, 20000);
+    </script>
+</body>
+</html>
